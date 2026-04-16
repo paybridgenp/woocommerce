@@ -4,15 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04b3ef1a97c565807243a9ba75994db7",
+    "content-hash": "a5b6394f954b1d564a393b484726e728",
     "packages": [
         {
             "name": "paybridge-np/sdk",
-            "version": "0.1.0",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paybridgenp/paybridgenp-php-sdk.git",
+                "reference": "e6a47d6e910cbea3346122297892ea729342288e"
+            },
             "dist": {
-                "type": "path",
-                "url": "../php-sdk",
-                "reference": "3d1503b435707e1a77e05afa7876a8dccb21efae"
+                "type": "zip",
+                "url": "https://api.github.com/repos/paybridgenp/paybridgenp-php-sdk/zipball/e6a47d6e910cbea3346122297892ea729342288e",
+                "reference": "e6a47d6e910cbea3346122297892ea729342288e",
+                "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
@@ -28,16 +34,7 @@
                     "PayBridgeNP\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "PayBridgeNP\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -51,10 +48,11 @@
                 "paybridge",
                 "payment"
             ],
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/paybridgenp/paybridgenp-php-sdk/issues",
+                "source": "https://github.com/paybridgenp/paybridgenp-php-sdk/tree/v1.3.0"
+            },
+            "time": "2026-04-14T20:56:03+00:00"
         }
     ],
     "packages-dev": [],
