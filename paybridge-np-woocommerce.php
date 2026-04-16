@@ -84,7 +84,7 @@ add_action( 'plugins_loaded', function () {
 
 	// Register classic gateway
 	add_filter( 'woocommerce_payment_gateways', function ( $gateways ) {
-		$gateways[] = 'WC_Gateway_PayBridge';
+		$gateways[] = 'PayBridgeNP_Gateway';
 		return $gateways;
 	} );
 
@@ -105,7 +105,7 @@ add_action( 'woocommerce_blocks_loaded', function () {
 	add_action(
 		'woocommerce_blocks_payment_method_type_registration',
 		function ( $payment_method_registry ) {
-			$payment_method_registry->register( new WC_Gateway_PayBridge_Blocks() );
+			$payment_method_registry->register( new PayBridgeNP_Gateway_Blocks() );
 		}
 	);
 } );

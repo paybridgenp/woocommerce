@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
-class WC_Gateway_PayBridge_Blocks extends AbstractPaymentMethodType {
+class PayBridgeNP_Gateway_Blocks extends AbstractPaymentMethodType {
 
 	protected $name = 'paybridge_np';
 
