@@ -1,0 +1,22 @@
+{
+    "name": "paybridge-np/woocommerce",
+    "description": "WooCommerce payment gateway plugin for PayBridgeNP",
+    "type": "library",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "paybridge-np/sdk": "^1.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "build": [
+            "composer install --no-dev --optimize-autoloader",
+            "cd .. && cp -r woocommerce paybridge-np-woocommerce && zip -r paybridge-np-woocommerce.zip paybridge-np-woocommerce/ --exclude '*.git*' && rm -rf paybridge-np-woocommerce && echo 'Built: packages/paybridge-np-woocommerce.zip'"
+        ]
+    }
+}

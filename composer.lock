@@ -1,0 +1,73 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "04b3ef1a97c565807243a9ba75994db7",
+    "packages": [
+        {
+            "name": "paybridge-np/sdk",
+            "version": "0.1.0",
+            "dist": {
+                "type": "path",
+                "url": "../php-sdk",
+                "reference": "3d1503b435707e1a77e05afa7876a8dccb21efae"
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0 || ^10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PayBridgeNP\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "PayBridgeNP\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Official PHP SDK for PayBridge NP — Nepal payment gateway aggregator",
+            "homepage": "https://paybridgenp.com",
+            "keywords": [
+                "esewa",
+                "gateway",
+                "khalti",
+                "nepal",
+                "paybridge",
+                "payment"
+            ],
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}
