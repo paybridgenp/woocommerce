@@ -27,7 +27,7 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 	public function __construct() {
 		$this->id                 = 'paybridge_np';
 		$this->method_title       = 'PayBridge NP';
-		$this->method_description = __( 'Accept payments via eSewa, Khalti, and more. Powered by PayBridge NP.', 'paybridge-np-woocommerce' );
+		$this->method_description = __( 'Accept payments via eSewa, Khalti, and more. Powered by PayBridge NP.', 'paybridgenp-for-woocommerce' );
 		$this->icon               = apply_filters(
 			'woocommerce_paybridge_np_icon',
 			PAYBRIDGE_WC_URL . 'assets/icon.svg'
@@ -60,36 +60,36 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 
 		$this->form_fields = [
 			'enabled'        => [
-				'title'   => __( 'Enable/Disable', 'paybridge-np-woocommerce' ),
+				'title'   => __( 'Enable/Disable', 'paybridgenp-for-woocommerce' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable PayBridge NP', 'paybridge-np-woocommerce' ),
+				'label'   => __( 'Enable PayBridge NP', 'paybridgenp-for-woocommerce' ),
 				'default' => 'no',
 			],
 			'title'          => [
-				'title'       => __( 'Title', 'paybridge-np-woocommerce' ),
+				'title'       => __( 'Title', 'paybridgenp-for-woocommerce' ),
 				'type'        => 'text',
-				'description' => __( 'Payment method title shown to customers at checkout.', 'paybridge-np-woocommerce' ),
+				'description' => __( 'Payment method title shown to customers at checkout.', 'paybridgenp-for-woocommerce' ),
 				'default'     => 'PayBridge NP',
 				'desc_tip'    => true,
 			],
 			'description'    => [
-				'title'   => __( 'Description', 'paybridge-np-woocommerce' ),
+				'title'   => __( 'Description', 'paybridgenp-for-woocommerce' ),
 				'type'    => 'textarea',
-				'default' => __( 'Pay securely with eSewa, Khalti, and more.', 'paybridge-np-woocommerce' ),
+				'default' => __( 'Pay securely with eSewa, Khalti, and more.', 'paybridgenp-for-woocommerce' ),
 			],
 			'secret_key'     => [
-				'title'       => __( 'Secret Key', 'paybridge-np-woocommerce' ),
+				'title'       => __( 'Secret Key', 'paybridgenp-for-woocommerce' ),
 				'type'        => 'password',
 				/* translators: example key prefixes */
-				'description' => __( 'Your PayBridge NP secret key (starts with sk_live_ or sk_test_).', 'paybridge-np-woocommerce' ),
+				'description' => __( 'Your PayBridge NP secret key (starts with sk_live_ or sk_test_).', 'paybridgenp-for-woocommerce' ),
 				'desc_tip'    => true,
 			],
 			'webhook_secret' => [
-				'title'       => __( 'Webhook Signing Secret', 'paybridge-np-woocommerce' ),
+				'title'       => __( 'Webhook Signing Secret', 'paybridgenp-for-woocommerce' ),
 				'type'        => 'password',
-				/* translators: %s: webhook listener URL */
 				'description' => sprintf(
-					__( 'Signing secret (whsec_…) from your PayBridge NP dashboard. Set your webhook endpoint URL to: %s', 'paybridge-np-woocommerce' ),
+					/* translators: %s: webhook listener URL */
+					__( 'Signing secret (whsec_…) from your PayBridge NP dashboard. Set your webhook endpoint URL to: %s', 'paybridgenp-for-woocommerce' ),
 					'<br><code>' . esc_html( $webhook_url ) . '</code>'
 				),
 			],
@@ -111,14 +111,14 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 	public function process_payment( $order_id ): array {
 		$order = wc_get_order( $order_id );
 		if ( ! $order ) {
-			wc_add_notice( __( 'Order not found.', 'paybridge-np-woocommerce' ), 'error' );
+			wc_add_notice( __( 'Order not found.', 'paybridgenp-for-woocommerce' ), 'error' );
 			return [ 'result' => 'failure' ];
 		}
 
 		$secret_key = $this->get_option( 'secret_key' );
 		if ( empty( $secret_key ) ) {
 			wc_add_notice(
-				__( 'PayBridge NP is not configured. Please contact the store owner.', 'paybridge-np-woocommerce' ),
+				__( 'PayBridge NP is not configured. Please contact the store owner.', 'paybridgenp-for-woocommerce' ),
 				'error'
 			);
 			return [ 'result' => 'failure' ];
@@ -168,7 +168,7 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 			wc_add_notice(
 				sprintf(
 					/* translators: %s: error message from PayBridge API */
-					__( 'Payment error: %s', 'paybridge-np-woocommerce' ),
+					__( 'Payment error: %s', 'paybridgenp-for-woocommerce' ),
 					$e->getMessage()
 				),
 				'error'
@@ -181,7 +181,7 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 		$order->add_order_note(
 			sprintf(
 				/* translators: %s: PayBridge checkout session ID */
-				__( 'PayBridge NP checkout session created: %s', 'paybridge-np-woocommerce' ),
+				__( 'PayBridge NP checkout session created: %s', 'paybridgenp-for-woocommerce' ),
 				$session['id']
 			)
 		);
@@ -205,11 +205,15 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 	 * payment is verified server-to-server.
 	 */
 	public function handle_return(): void {
+		// These parameters are set by PayBridge NP in the redirect URL — not user-submitted
+		// form data — so nonce verification does not apply here.
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		$order_id   = isset( $_GET['order_id'] )   ? absint( $_GET['order_id'] )                              : 0;
 		$order_key  = isset( $_GET['order_key'] )  ? sanitize_text_field( wp_unslash( $_GET['order_key'] ) )  : '';
 		$cancelled  = ! empty( $_GET['cancelled'] );
 		$status     = isset( $_GET['status'] )     ? sanitize_text_field( wp_unslash( $_GET['status'] ) )     : '';
 		$session_id = isset( $_GET['session_id'] ) ? sanitize_text_field( wp_unslash( $_GET['session_id'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		if ( ! $order_id ) {
 			wp_safe_redirect( wc_get_checkout_url() );
@@ -231,9 +235,9 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 		if ( $cancelled ) {
 			$order->update_status(
 				'cancelled',
-				__( 'Customer cancelled the payment on PayBridge NP.', 'paybridge-np-woocommerce' )
+				__( 'Customer cancelled the payment on PayBridge NP.', 'paybridgenp-for-woocommerce' )
 			);
-			wc_add_notice( __( 'Payment was cancelled.', 'paybridge-np-woocommerce' ), 'notice' );
+			wc_add_notice( __( 'Payment was cancelled.', 'paybridgenp-for-woocommerce' ), 'notice' );
 			wp_safe_redirect( wc_get_checkout_url() );
 			exit;
 		}
@@ -244,8 +248,8 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 				'on-hold',
 				sprintf(
 					/* translators: %s: PayBridge session ID */
-					__( 'PayBridge NP: payment submitted, awaiting server confirmation. Session: %s', 'paybridge-np-woocommerce' ),
-					$session_id ?: __( 'unknown', 'paybridge-np-woocommerce' )
+					__( 'PayBridge NP: payment submitted, awaiting server confirmation. Session: %s', 'paybridgenp-for-woocommerce' ),
+					$session_id ?: __( 'unknown', 'paybridgenp-for-woocommerce' )
 				)
 			);
 			wp_safe_redirect( $this->get_return_url( $order ) );
@@ -255,9 +259,9 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 		// Anything else (status=failed, missing status, etc.)
 		$order->update_status(
 			'failed',
-			__( 'PayBridge NP: payment was not completed.', 'paybridge-np-woocommerce' )
+			__( 'PayBridge NP: payment was not completed.', 'paybridgenp-for-woocommerce' )
 		);
-		wc_add_notice( __( 'Payment failed. Please try again.', 'paybridge-np-woocommerce' ), 'error' );
+		wc_add_notice( __( 'Payment failed. Please try again.', 'paybridgenp-for-woocommerce' ), 'error' );
 		wp_safe_redirect( wc_get_checkout_url() );
 		exit;
 	}
@@ -283,7 +287,10 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 		// event and get free orders. The merchant must set the webhook signing
 		// secret in their settings before PayBridge will move any orders.
 		if ( empty( $webhook_secret ) ) {
-			error_log( '[PayBridge NP] Webhook received but no signing secret is configured. Configure the "Webhook Signing Secret" field in WooCommerce → Settings → Payments → PayBridge NP.' );
+			wc_get_logger()->error(
+				'Webhook received but no signing secret is configured. Configure the "Webhook Signing Secret" field in WooCommerce → Settings → Payments → PayBridge NP.',
+				[ 'source' => 'paybridgenp-for-woocommerce' ]
+			);
 			status_header( 400 );
 			exit( 'Webhook signing secret not configured' );
 		}
@@ -321,8 +328,8 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 				$found = wc_get_orders(
 					[
 						'limit'      => 1,
-						'meta_key'   => '_paybridge_session_id',
-						'meta_value' => $session_id,
+						'meta_key'   => '_paybridge_session_id', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+						'meta_value' => $session_id,             // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 						'return'     => 'ids',
 					]
 				);
@@ -362,7 +369,7 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 					$order->add_order_note(
 						sprintf(
 							/* translators: 1: provider, 2: provider ref, 3: amount */
-							__( 'PayBridge NP payment confirmed. Provider: %1$s | Ref: %2$s | Amount: NPR %3$s', 'paybridge-np-woocommerce' ),
+							__( 'PayBridge NP payment confirmed. Provider: %1$s | Ref: %2$s | Amount: NPR %3$s', 'paybridgenp-for-woocommerce' ),
 							$provider,
 							$prov_ref,
 							$amount_nr
@@ -380,10 +387,10 @@ class WC_Gateway_PayBridge extends WC_Payment_Gateway {
 						$reason
 							? sprintf(
 								/* translators: %s: failure reason */
-								__( 'PayBridge NP payment failed: %s', 'paybridge-np-woocommerce' ),
+								__( 'PayBridge NP payment failed: %s', 'paybridgenp-for-woocommerce' ),
 								$reason
 							)
-							: __( 'PayBridge NP payment failed.', 'paybridge-np-woocommerce' )
+							: __( 'PayBridge NP payment failed.', 'paybridgenp-for-woocommerce' )
 					);
 				}
 				break;

@@ -1,12 +1,12 @@
 === PayBridgeNP for WooCommerce ===
 Contributors:       paybridgenp
-Tags:               payment gateway, nepal, esewa, khalti, woocommerce, npr
+Tags:               payment gateway, nepal, esewa, khalti, woocommerce
 Requires at least:  5.8
-Tested up to:       6.9
+Tested up to:       7.0
 Stable tag:         1.0.0
 Requires PHP:       7.4
 WC requires at least: 7.0
-WC tested up to:    10.0
+WC tested up to:    10.7
 License:            GPL-2.0-or-later
 License URI:        https://www.gnu.org/licenses/gpl-2.0.html
 

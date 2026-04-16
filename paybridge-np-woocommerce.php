@@ -1,18 +1,18 @@
 <?php
 /**
  * Plugin Name: PayBridgeNP for WooCommerce
- * Plugin URI:  https://paybridgenp.com
+ * Plugin URI:  https://paybridgenp.com/integrations/woocommerce
  * Description: Accept payments via eSewa, Khalti, and more through PayBridgeNP.
  * Version:     1.0.0
  * Author:      PayBridgeNP
  * Author URI:  https://paybridgenp.com
- * Text Domain: paybridge-np-woocommerce
+ * Text Domain: paybridgenp-for-woocommerce
  * Domain Path: /languages
  *
  * Requires at least: 5.8
- * Tested up to:      6.9
+ * Tested up to:      7.0
  * WC requires at least: 7.0
- * WC tested up to:   10.0
+ * WC tested up to:   10.7
  * Requires PHP:      7.4
  *
  * License:     GPL-2.0-or-later
@@ -64,7 +64,7 @@ add_action( 'plugins_loaded', function () {
 	if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
 		add_action( 'admin_notices', function () {
 			echo '<div class="notice notice-error"><p>'
-				. esc_html__( 'PayBridgeNP for WooCommerce requires WooCommerce to be installed and active.', 'paybridge-np-woocommerce' )
+				. esc_html__( 'PayBridgeNP for WooCommerce requires WooCommerce to be installed and active.', 'paybridgenp-for-woocommerce' )
 				. '</p></div>';
 		} );
 		return;
@@ -74,7 +74,7 @@ add_action( 'plugins_loaded', function () {
 	if ( ! class_exists( \PayBridgeNP\PayBridge::class ) ) {
 		add_action( 'admin_notices', function () {
 			echo '<div class="notice notice-error"><p>'
-				. esc_html__( 'PayBridgeNP: the PHP SDK is missing. Please run composer install inside the plugin directory or re-upload the full plugin ZIP.', 'paybridge-np-woocommerce' )
+				. esc_html__( 'PayBridgeNP: the PHP SDK is missing. Please run composer install inside the plugin directory or re-upload the full plugin ZIP.', 'paybridgenp-for-woocommerce' )
 				. '</p></div>';
 		} );
 		return;
