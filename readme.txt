@@ -3,14 +3,14 @@ Contributors:       paybridgenp
 Tags:               payment gateway, nepal, esewa, khalti, woocommerce
 Requires at least:  5.8
 Tested up to:       7.0
-Stable tag:         1.0.0
+Stable tag:         1.0.1
 Requires PHP:       7.4
 WC requires at least: 7.0
 WC tested up to:    10.7
 License:            GPL-2.0-or-later
 License URI:        https://www.gnu.org/licenses/gpl-2.0.html
 
-Accept payments from Nepali customers via eSewa, Khalti, and more — powered by PayBridgeNP.
+Accept payments from Nepali customers via eSewa, Khalti, and more, powered by PayBridgeNP.
 
 == Description ==
 
@@ -28,19 +28,19 @@ PayBridgeNP. Your store never handles raw payment credentials.
 
 **Features**
 
-* One-time setup — enter your PayBridgeNP secret key and you're live
-* Sandbox mode — use test API keys for safe development and QA
-* Webhook support — reliable order updates via signed server-to-server callbacks
-* HMAC-SHA256 signature verification — all webhooks are cryptographically verified
+* One-time setup: enter your PayBridgeNP secret key and you're live
+* Sandbox mode: use test API keys for safe development and QA
+* Webhook support: reliable order updates via signed server-to-server callbacks
+* HMAC-SHA256 signature verification on all webhooks
 * HPOS (High-Performance Order Storage) compatible
-* Block checkout compatible — works with both the classic shortcode checkout and the modern WooCommerce Blocks checkout
+* Block checkout compatible: works with both the classic shortcode checkout and the modern WooCommerce Blocks checkout
 * Works with any WordPress permalink structure
 
 **How it works**
 
 1. Customer places an order and selects *PayBridgeNP* at checkout
 2. They are redirected to the PayBridgeNP hosted payment page where they pick a wallet
-3. After payment they return to your store's order-received page — order is set to *On Hold* immediately
+3. After payment they return to your store's order-received page; the order is set to *On Hold* immediately
 4. A signed `payment.succeeded` webhook from PayBridgeNP confirms the payment server-to-server and moves the order to *Processing*
 
 The webhook is what provides authoritative confirmation. Without it, orders stay On Hold indefinitely.
@@ -59,7 +59,7 @@ The webhook is what provides authoritative confirmation. Without it, orders stay
 
 1. Clone or copy the `packages/woocommerce` directory into `wp-content/plugins/paybridge-np-woocommerce`
 2. Run `composer install --no-dev` inside the plugin directory
-3. Activate the plugin in WordPress admin and follow steps 4–5 above
+3. Activate the plugin in WordPress admin and follow steps 4-5 above
 
 **Webhook setup (required for orders to reach Processing)**
 
@@ -104,6 +104,10 @@ recommended for a reliable store experience.
 Yes. PayBridgeNP works with both the classic shortcode checkout and the modern WooCommerce Blocks checkout out of the box.
 
 == Changelog ==
+
+= 1.0.1 =
+* Add `Requires Plugins: woocommerce` header so WordPress 6.5+ enforces the WooCommerce dependency at activation
+* Bundle the latest PayBridgeNP PHP SDK (2.0.0)
 
 = 1.0.0 =
 * Initial release

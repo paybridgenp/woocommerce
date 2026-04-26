@@ -3,7 +3,7 @@
  * Plugin Name: PayBridgeNP for WooCommerce
  * Plugin URI:  https://paybridgenp.com/integrations/woocommerce
  * Description: Accept payments via eSewa, Khalti, and more through PayBridgeNP.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      PayBridgeNP
  * Author URI:  https://paybridgenp.com
  * Text Domain: paybridgenp-for-woocommerce
@@ -11,6 +11,7 @@
  *
  * Requires at least: 5.8
  * Tested up to:      7.0
+ * Requires Plugins:  woocommerce
  * WC requires at least: 7.0
  * WC tested up to:   10.7
  * Requires PHP:      7.4
@@ -23,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PAYBRIDGE_WC_VERSION', '1.0.0' );
+define( 'PAYBRIDGE_WC_VERSION', '1.0.1' );
 define( 'PAYBRIDGE_WC_FILE',    __FILE__ );
 define( 'PAYBRIDGE_WC_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'PAYBRIDGE_WC_URL',     plugin_dir_url( __FILE__ ) );
@@ -60,23 +61,20 @@ if ( file_exists( PAYBRIDGE_WC_DIR . 'vendor/autoload.php' ) ) {
 }
 
 add_action( 'plugins_loaded', function () {
-	// WooCommerce must be active
-	if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
-		add_action( 'admin_notices', function () {
-			echo '<div class="notice notice-error"><p>'
-				. esc_html__( 'PayBridgeNP for WooCommerce requires WooCommerce to be installed and active.', 'paybridgenp-for-woocommerce' )
-				. '</p></div>';
-		} );
-		return;
-	}
+	// WooCommerce dependency is enforced by the "Requires Plugins" header in
+	// WordPress 6.5+; activation is blocked when WooCommerce is missing.
 
 	// PayBridge PHP SDK must be loadable
 	if ( ! class_exists( \PayBridgeNP\PayBridge::class ) ) {
 		add_action( 'admin_notices', function () {
 			echo '<div class="notice notice-error"><p>'
-				. esc_html__( 'PayBridgeNP: the PHP SDK is missing. Please run composer install inside the plugin directory or re-upload the full plugin ZIP.', 'paybridgenp-for-woocommerce' )
+				. esc_html__( 'PayBridgeNP: the PHP SDK is missing. Please re-upload the full plugin ZIP from wordpress.org.', 'paybridgenp-for-woocommerce' )
 				. '</p></div>';
 		} );
+		return;
+	}
+
+	if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
 		return;
 	}
 

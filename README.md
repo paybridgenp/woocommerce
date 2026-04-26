@@ -2,6 +2,8 @@
 
 Accept payments from Nepali customers via **eSewa**, **Khalti**, and **ConnectIPS** — through a single, unified integration powered by [PayBridgeNP](https://paybridgenp.com).
 
+**[Discord](https://discord.gg/aquta4JwJt)** - community support and questions
+
 ## Installation
 
 ### From ZIP (recommended for most stores)
