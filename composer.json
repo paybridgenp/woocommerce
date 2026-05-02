@@ -2,12 +2,12 @@
     "name": "paybridge-np/woocommerce",
     "description": "WooCommerce payment gateway plugin for PayBridgeNP",
     "type": "library",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "require": {
         "php": ">=7.4",
         "ext-curl": "*",
         "ext-json": "*",
-        "paybridge-np/sdk": "^2.0"
+        "paybridge-np/sdk": "^3.0"
     },
     "config": {
         "optimize-autoloader": true,

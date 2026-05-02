@@ -3,7 +3,7 @@ Contributors:       paybridgenp
 Tags:               payment gateway, nepal, esewa, khalti, woocommerce
 Requires at least:  5.8
 Tested up to:       7.0
-Stable tag:         1.0.1
+Stable tag:         1.1.0
 Requires PHP:       7.4
 WC requires at least: 7.0
 WC tested up to:    10.7
@@ -104,6 +104,12 @@ recommended for a reliable store experience.
 Yes. PayBridgeNP works with both the classic shortcode checkout and the modern WooCommerce Blocks checkout out of the box.
 
 == Changelog ==
+
+= 1.1.0 =
+* Bundle the latest PayBridgeNP PHP SDK (3.0.0) with the new typed exception hierarchy and nested error envelope handling
+* Errors thrown from PayBridgeNP API calls are now typed exceptions (AuthenticationException, AccountException, PermissionException, InvalidRequestException, IdempotencyException, RateLimitException) — branch with instanceof in custom integrations
+* Every exception now carries getErrorType(), getErrorCode(), and getRequestId() — quote getRequestId() in support requests for fastest triage
+* Backward compatible: the SDK still parses the legacy flat error shape during the API transition window
 
 = 1.0.1 =
 * Add `Requires Plugins: woocommerce` header so WordPress 6.5+ enforces the WooCommerce dependency at activation
