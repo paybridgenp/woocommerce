@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba2861c2e68cd860d906d170cdf177b8",
+    "content-hash": "6300c84acc119dd3a0f39a72b1715cc9",
     "packages": [
         {
             "name": "paybridge-np/sdk",

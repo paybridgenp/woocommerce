@@ -22,14 +22,14 @@ use PayBridgeNP\Exceptions\SignatureVerificationException;
  * Both (2) and (3) are registered as WooCommerce API endpoints so they work even
  * when pretty-permalinks are disabled.
  */
-class PayBridgeNP_Gateway extends WC_Payment_Gateway {
+class Paybridge_WC_Gateway extends WC_Payment_Gateway {
 
 	public function __construct() {
 		$this->id                 = 'paybridge_np';
 		$this->method_title       = 'PayBridge NP';
 		$this->method_description = __( 'Accept payments via eSewa, Khalti, and more. Powered by PayBridge NP.', 'paybridgenp-for-woocommerce' );
 		$this->icon               = apply_filters(
-			'paybridgenp_gateway_icon',
+			'paybridge_wc_gateway_icon',
 			PAYBRIDGE_WC_URL . 'assets/icon.svg'
 		);
 		$this->has_fields         = false;

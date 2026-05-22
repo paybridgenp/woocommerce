@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
-class PayBridgeNP_Gateway_Blocks extends AbstractPaymentMethodType {
+class Paybridge_WC_Gateway_Blocks extends AbstractPaymentMethodType {
 
 	protected $name = 'paybridge_np';
 
@@ -22,14 +22,14 @@ class PayBridgeNP_Gateway_Blocks extends AbstractPaymentMethodType {
 
 	public function get_payment_method_script_handles(): array {
 		wp_register_script(
-			'paybridge-np-blocks',
+			'paybridge-wc-blocks',
 			PAYBRIDGE_WC_URL . 'assets/js/paybridge-block.js',
 			[ 'wc-blocks-registry', 'wc-settings', 'wp-element' ],
 			PAYBRIDGE_WC_VERSION,
 			true
 		);
 
-		return [ 'paybridge-np-blocks' ];
+		return [ 'paybridge-wc-blocks' ];
 	}
 
 	public function get_payment_method_data(): array {

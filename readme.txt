@@ -3,7 +3,7 @@ Contributors:       paybridgenp
 Tags:               payment gateway, nepal, esewa, khalti, woocommerce
 Requires at least:  5.8
 Tested up to:       7.0
-Stable tag:         1.1.0
+Stable tag:         1.1.1
 Requires PHP:       7.4
 WC requires at least: 7.0
 WC tested up to:    10.7
@@ -104,6 +104,9 @@ recommended for a reliable store experience.
 Yes. PayBridgeNP works with both the classic shortcode checkout and the modern WooCommerce Blocks checkout out of the box.
 
 == Changelog ==
+
+= 1.1.1 =
+* Rename gateway classes and the icon filter to use a consistent `Paybridge_WC` / `paybridge_wc_` prefix, matching the existing `PAYBRIDGE_WC_*` constants (WordPress.org plugin guidelines on unique prefixes)
 
 = 1.1.0 =
 * Bundle the latest PayBridgeNP PHP SDK (3.0.0) with the new typed exception hierarchy and nested error envelope handling
