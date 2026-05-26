@@ -21,7 +21,7 @@ digital wallets and payment methods without writing a single line of code.
 
 * eSewa
 * Khalti
-* ConnectIPS
+* Fonepay
 
 Customers choose their preferred method on a branded, mobile-friendly checkout page hosted by
 PayBridgeNP. Your store never handles raw payment credentials.
@@ -120,7 +120,7 @@ Yes. PayBridgeNP works with both the classic shortcode checkout and the modern W
 
 = 1.0.0 =
 * Initial release
-* eSewa, Khalti, and ConnectIPS support via PayBridgeNP hosted checkout
+* eSewa, Khalti, and Fonepay support via PayBridgeNP hosted checkout
 * Classic shortcode checkout and WooCommerce Blocks checkout support
 * Webhook handler with HMAC-SHA256 signature verification (signing secret required)
 * HPOS compatible
