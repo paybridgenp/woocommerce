@@ -1,6 +1,6 @@
 # PayBridgeNP for WooCommerce
 
-Accept payments from Nepali customers via **eSewa**, **Khalti**, and **ConnectIPS** — through a single, unified integration powered by [PayBridgeNP](https://paybridgenp.com).
+Accept payments from Nepali customers via **eSewa**, **Khalti**, and **Fonepay** through a single, unified integration powered by [PayBridgeNP](https://paybridgenp.com).
 
 **[Discord](https://discord.gg/aquta4JwJt)** - community support and questions
 
@@ -23,7 +23,7 @@ cd paybridge-np-woocommerce
 composer install --no-dev
 ```
 
-Activate the plugin in WordPress admin and follow steps 4–5 above.
+Activate the plugin in WordPress admin and follow steps 4-5 above.
 
 ## Webhook setup
 
