@@ -1,18 +1,33 @@
 # PayBridgeNP for WooCommerce
 
+[![WordPress.org plugin version](https://img.shields.io/wordpress/plugin/v/paybridgenp-for-woocommerce?label=WordPress.org)](https://wordpress.org/plugins/paybridgenp-for-woocommerce/)
+[![WordPress.org rating](https://img.shields.io/wordpress/plugin/rating/paybridgenp-for-woocommerce)](https://wordpress.org/plugins/paybridgenp-for-woocommerce/)
+[![WordPress.org downloads](https://img.shields.io/wordpress/plugin/dt/paybridgenp-for-woocommerce)](https://wordpress.org/plugins/paybridgenp-for-woocommerce/)
+
 Accept payments from Nepali customers via **eSewa**, **Khalti**, and **Fonepay** through a single, unified integration powered by [PayBridgeNP](https://paybridgenp.com).
+
+**Available on the official [WordPress.org plugin directory](https://wordpress.org/plugins/paybridgenp-for-woocommerce/).** That's the recommended install path - search "PayBridgeNP" from your WordPress admin and click Install.
 
 **[Discord](https://discord.gg/aquta4JwJt)** - community support and questions
 
 ## Installation
 
-### From ZIP (recommended for most stores)
+### From WordPress.org (recommended)
 
-1. Download the latest `paybridge-np-woocommerce.zip` from [Releases](https://github.com/paybridgenp/woocommerce/releases)
-2. In your WordPress admin go to **Plugins → Add New → Upload Plugin**
-3. Upload the ZIP and click **Install Now**, then **Activate**
+1. In your WordPress admin go to **Plugins → Add New**
+2. Search for **PayBridgeNP**
+3. Click **Install Now**, then **Activate**
 4. Go to **WooCommerce → Settings → Payments** and enable **PayBridgeNP**
 5. Enter your secret key from the [PayBridgeNP dashboard](https://dashboard.paybridgenp.com)
+
+Auto-updates work through core WordPress - no manual upgrade steps.
+
+### From ZIP
+
+1. Download `paybridge-np-woocommerce.zip` from [paybridgenp.com/integrations/woocommerce](https://paybridgenp.com/integrations/woocommerce) or [GitHub Releases](https://github.com/paybridgenp/woocommerce/releases)
+2. In your WordPress admin go to **Plugins → Add New → Upload Plugin**
+3. Upload the ZIP and click **Install Now**, then **Activate**
+4. Continue from step 4 above
 
 ### From source (developers)
 
@@ -23,7 +38,7 @@ cd paybridge-np-woocommerce
 composer install --no-dev
 ```
 
-Activate the plugin in WordPress admin and follow steps 4-5 above.
+Activate the plugin in WordPress admin and follow the configuration steps above.
 
 ## Webhook setup
 
