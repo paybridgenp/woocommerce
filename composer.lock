@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6300c84acc119dd3a0f39a72b1715cc9",
+    "content-hash": "f7dad61637f1f0f5cbf9a0c1cb223b1e",
     "packages": [
         {
             "name": "paybridge-np/sdk",
-            "version": "3.0.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paybridgenp/paybridgenp-php-sdk.git",
-                "reference": "b84f723070c2f6758f63925c45ec827b84224fde"
+                "reference": "e5124c4f96de59c261307eba8452a729db65e0ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paybridgenp/paybridgenp-php-sdk/zipball/b84f723070c2f6758f63925c45ec827b84224fde",
-                "reference": "b84f723070c2f6758f63925c45ec827b84224fde",
+                "url": "https://api.github.com/repos/paybridgenp/paybridgenp-php-sdk/zipball/e5124c4f96de59c261307eba8452a729db65e0ad",
+                "reference": "e5124c4f96de59c261307eba8452a729db65e0ad",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
             "license": [
                 "MIT"
             ],
-            "description": "Official PHP SDK for PayBridge NP — Nepal payment gateway aggregator",
+            "description": "Official PHP SDK for PayBridgeNP — Nepal payment gateway aggregator",
             "homepage": "https://paybridgenp.com",
             "keywords": [
                 "esewa",
@@ -50,9 +50,9 @@
             ],
             "support": {
                 "issues": "https://github.com/paybridgenp/paybridgenp-php-sdk/issues",
-                "source": "https://github.com/paybridgenp/paybridgenp-php-sdk/tree/v3.0.0"
+                "source": "https://github.com/paybridgenp/paybridgenp-php-sdk/tree/v5.0.0"
             },
-            "time": "2026-05-02T05:19:56+00:00"
+            "time": "2026-06-08T01:40:10+00:00"
         }
     ],
     "packages-dev": [],

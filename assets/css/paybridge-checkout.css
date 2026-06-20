@@ -1,0 +1,78 @@
+/*
+ * PayBridgeNP for WooCommerce — checkout tiles
+ *
+ * Only loaded when the "Provider tiles" display style is enabled and the
+ * customer is on a checkout page. All selectors are scoped under
+ * .paybridge-wc-tiles to avoid clashing with theme CSS.
+ */
+
+.paybridge-wc-tiles {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: 10px;
+	margin: 12px 0 4px;
+	padding: 0;
+	border: 0;
+}
+
+.paybridge-wc-tile {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 0 16px;
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	border-radius: 10px;
+	background: #fff;
+	cursor: pointer;
+	transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+	text-align: center;
+	min-height: 58px;
+}
+
+.paybridge-wc-tile:hover {
+	border-color: rgba(0, 0, 0, 0.25);
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+.paybridge-wc-tile input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	pointer-events: none;
+}
+
+.paybridge-wc-tile:has(input[type="radio"]:focus-visible),
+.paybridge-wc-tile.is-active {
+	border-color: #6366F1;
+	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.18);
+}
+
+.paybridge-wc-tile input[type="radio"]:checked + img,
+.paybridge-wc-tile.is-active img {
+	transform: scale(1.02);
+}
+
+.paybridge-wc-tile img {
+	width: 26px;
+	height: 26px;
+	object-fit: contain;
+	transition: transform 120ms ease;
+}
+
+.paybridge-wc-tile__name {
+	font-size: 14px;
+	font-weight: 600;
+	color: #1f2937;
+	line-height: 1.2;
+}
+
+/* Classic checkout: WC wraps payment_fields() inside a li.payment_box.
+   When a tile radio is :checked, give the tile the active styling without
+   relying on JS for the classic flow. */
+.paybridge-wc-tile:has(input[type="radio"]:checked) {
+	border-color: #6366F1;
+	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.18);
+}

@@ -23,9 +23,9 @@ class Paybridge_WC_Gateway_Blocks extends AbstractPaymentMethodType {
 	public function get_payment_method_script_handles(): array {
 		wp_register_script(
 			'paybridge-wc-blocks',
-			PAYBRIDGE_WC_URL . 'assets/js/paybridge-block.js',
+			PAYBRIDGENP_WC_URL . 'assets/js/paybridge-block.js',
 			[ 'wc-blocks-registry', 'wc-settings', 'wp-element' ],
-			PAYBRIDGE_WC_VERSION,
+			PAYBRIDGENP_WC_VERSION,
 			true
 		);
 
@@ -34,9 +34,11 @@ class Paybridge_WC_Gateway_Blocks extends AbstractPaymentMethodType {
 
 	public function get_payment_method_data(): array {
 		return [
-			'title'       => $this->get_setting( 'title', 'PayBridge NP' ),
-			'description' => $this->get_setting( 'description', '' ),
-			'supports'    => $this->get_supported_features(),
+			'title'        => $this->get_setting( 'title', 'PayBridgeNP' ),
+			'description'  => $this->get_setting( 'description', '' ),
+			'displayStyle' => $this->get_setting( 'display_style', 'single_button' ),
+			'providers'    => Paybridge_WC_Gateway::enabled_providers( $this->get_setting( 'secret_key', '' ) ),
+			'supports'     => $this->get_supported_features(),
 		];
 	}
 }
