@@ -3,7 +3,7 @@ Contributors:       paybridgenp
 Tags:               payment gateway, nepal, esewa, khalti, woocommerce
 Requires at least:  5.8
 Tested up to:       7.0
-Stable tag:         1.2.0
+Stable tag:         1.2.1
 Requires PHP:       7.4
 WC requires at least: 7.0
 WC tested up to:    10.7
@@ -63,8 +63,9 @@ The plugin contacts the PayBridgeNP API (https://api.paybridgenp.com) in these c
 * PayBridgeNP sends signed server-to-server webhooks back to your store to confirm payment results.
   The plugin verifies each one with an HMAC-SHA256 signature before updating the order.
 
-No data is sent to any other third party. Payment card and wallet credentials are never handled by
-your store; the customer enters them on PayBridgeNP's hosted page.
+No data is sent to any other third party. Your store and PayBridgeNP never see or
+handle payment credentials; the customer logs in with their chosen wallet or bank
+(eSewa, Khalti, or Fonepay), on the provider's own page.
 
 Use of the PayBridgeNP service is governed by its terms and privacy policy:
 
@@ -130,6 +131,9 @@ recommended for a reliable store experience.
 Yes. PayBridgeNP works with both the classic shortcode checkout and the modern WooCommerce Blocks checkout out of the box.
 
 == Changelog ==
+
+= 1.2.1 =
+* Docs: correct how payment handling is described. The customer authenticates on their chosen wallet or bank's own page (eSewa, Khalti, or Fonepay); neither your store nor PayBridgeNP ever sees or handles their credentials. No functional changes.
 
 = 1.2.0 =
 * New: "Provider tiles" display mode. In WooCommerce > Settings > Payments > PayBridgeNP, switch "Display style" to "Provider tiles (direct redirect)" to show your enabled providers as branded tiles on the checkout. The customer picks one and is sent straight to that provider, skipping the PayBridgeNP hosted picker.
