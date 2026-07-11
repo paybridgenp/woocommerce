@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PAYBRIDGENP_WC_VERSION', '1.2.0' );
+define( 'PAYBRIDGENP_WC_VERSION', '1.2.1' );
 define( 'PAYBRIDGENP_WC_FILE',    __FILE__ );
 define( 'PAYBRIDGENP_WC_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'PAYBRIDGENP_WC_URL',     plugin_dir_url( __FILE__ ) );
