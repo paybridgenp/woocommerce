@@ -1,6 +1,6 @@
 === PayBridgeNP for WooCommerce ===
 Contributors:       paybridgenp
-Tags:               payment gateway, nepal, esewa, khalti, woocommerce
+Tags:               payment gateway, nepal, esewa, khalti, fonepay
 Requires at least:  5.8
 Tested up to:       7.0
 Stable tag:         1.2.1
@@ -10,7 +10,7 @@ WC tested up to:    10.7
 License:            GPL-2.0-or-later
 License URI:        https://www.gnu.org/licenses/gpl-2.0.html
 
-Accept payments from Nepali customers via eSewa, Khalti, and more, powered by PayBridgeNP.
+Accept payments from Nepali customers via eSewa, Khalti, and Fonepay, powered by PayBridgeNP.
 
 == Description ==
 

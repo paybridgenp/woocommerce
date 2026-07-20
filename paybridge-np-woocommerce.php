@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PayBridgeNP for WooCommerce
  * Plugin URI:  https://paybridgenp.com/integrations/woocommerce
- * Description: Accept payments via eSewa, Khalti, and more through PayBridgeNP.
+ * Description: Accept payments via eSewa, Khalti, and Fonepay through PayBridgeNP.
  * Version:     1.2.1
  * Author:      PayBridgeNP
  * Author URI:  https://paybridgenp.com

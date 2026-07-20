@@ -30,7 +30,7 @@ class Paybridge_WC_Gateway extends WC_Payment_Gateway {
 	public function __construct() {
 		$this->id                 = 'paybridge_np';
 		$this->method_title       = 'PayBridgeNP';
-		$this->method_description = __( 'Accept payments via eSewa, Khalti, and more. Powered by PayBridgeNP.', 'paybridgenp-for-woocommerce' );
+		$this->method_description = __( 'Accept payments via eSewa, Khalti, and Fonepay. Powered by PayBridgeNP.', 'paybridgenp-for-woocommerce' );
 		$this->icon               = apply_filters(
 			'paybridge_wc_gateway_icon',
 			PAYBRIDGENP_WC_URL . 'assets/icon.svg'
@@ -221,7 +221,7 @@ class Paybridge_WC_Gateway extends WC_Payment_Gateway {
 			'description'    => [
 				'title'   => __( 'Description', 'paybridgenp-for-woocommerce' ),
 				'type'    => 'textarea',
-				'default' => __( 'Pay securely with eSewa, Khalti, and more.', 'paybridgenp-for-woocommerce' ),
+				'default' => __( 'Pay securely with eSewa, Khalti, or Fonepay.', 'paybridgenp-for-woocommerce' ),
 			],
 			'display_style'  => [
 				'title'       => __( 'Display style', 'paybridgenp-for-woocommerce' ),
