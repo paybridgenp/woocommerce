@@ -1,3 +1,13 @@
 vendor/
 *.zip
 .DS_Store
+
+# Resolved from Packagist at install time; a committed lock pinned a local
+# path dist that only existed inside the development checkout.
+composer.lock
+
+# Internal tooling: the release packager and the local WordPress harness both
+# resolve sibling paths that only exist in the development checkout, so they
+# are not useful from a standalone clone.
+scripts/
+docker/

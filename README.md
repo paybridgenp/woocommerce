@@ -57,14 +57,16 @@ Orders move to **Processing** only after a signed webhook confirms payment serve
 - Store currency set to **NPR**
 - A [PayBridgeNP](https://paybridgenp.com) account
 
-## Building a release ZIP
+## Installing from source
 
 ```bash
-composer run build
+composer install --no-dev
 ```
 
-This produces `packages/paybridge-np-woocommerce.zip` with vendor bundled, ready to upload.
+Merchants should install the packaged plugin from the
+[WordPress.org directory](https://wordpress.org/plugins/paybridgenp-for-woocommerce/)
+rather than building it.
 
 ## License
 
-GPL-2.0-or-later — see [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html)
+GPL-2.0-or-later - see [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html)

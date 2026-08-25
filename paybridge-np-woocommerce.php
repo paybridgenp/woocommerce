@@ -3,7 +3,7 @@
  * Plugin Name: PayBridgeNP for WooCommerce
  * Plugin URI:  https://paybridgenp.com/integrations/woocommerce
  * Description: Accept payments via eSewa, Khalti, and Fonepay through PayBridgeNP.
- * Version:     1.2.1
+ * Version:     1.3.0
  * Author:      PayBridgeNP
  * Author URI:  https://paybridgenp.com
  * Text Domain: paybridgenp-for-woocommerce
@@ -24,10 +24,83 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PAYBRIDGENP_WC_VERSION', '1.2.1' );
+/*
+ * Legacy-directory migration — 1.2.x and earlier.
+ *
+ * Until 1.3.0 the ZIP served from paybridgenp.com unpacked to
+ * `paybridge-np-woocommerce`, while the WordPress.org slug is
+ * `paybridgenp-for-woocommerce`. Uploading this ZIP over such an install writes a
+ * second directory and leaves the OLD one active, while WordPress reports
+ * "Plugin updated successfully". Verified on WordPress 7.0 / WooCommerce 11.0.1
+ * (2026-08-16): with both present, PAYBRIDGENP_WC_VERSION resolved to 1.2.0 and
+ * payments kept running on the old vendored SDK.
+ *
+ * Only the ZIP-upload path breaks. Measured the same day: WordPress matches a
+ * legacy install to WP.org by the slug the API returns, so it IS offered updates,
+ * and taking one migrates the directory cleanly; a fresh WP.org install over it
+ * is refused as already installed. The download page is the one channel that
+ * needs this guard — which is why it went unnoticed.
+ *
+ * The legacy directory sorts first, so by the time this file is reached its
+ * constants are already defined. Rather than fight over them mid-request,
+ * deactivate the old copy and bail — the next request comes up clean on this one.
+ */
+$paybridgenp_wc_legacy = 'paybridge-np-woocommerce/paybridge-np-woocommerce.php';
+if ( plugin_basename( __FILE__ ) !== $paybridgenp_wc_legacy ) {
+	$paybridgenp_wc_active = (array) get_option( 'active_plugins', array() );
+	if ( in_array( $paybridgenp_wc_legacy, $paybridgenp_wc_active, true ) ) {
+		if ( ! function_exists( 'deactivate_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		deactivate_plugins( $paybridgenp_wc_legacy );
+		update_option( 'paybridgenp_wc_legacy_deactivated', '1' );
+	}
+}
+unset( $paybridgenp_wc_legacy, $paybridgenp_wc_active );
+
+// Tell the merchant what happened, and that the stale folder is theirs to
+// remove. Settings are keyed on the gateway id (`paybridge_np`), not the
+// directory, so nothing is lost by deleting it.
+add_action( 'admin_notices', function () {
+	if ( '1' !== get_option( 'paybridgenp_wc_legacy_deactivated' ) ) {
+		return;
+	}
+	if ( ! is_dir( WP_PLUGIN_DIR . '/paybridge-np-woocommerce' ) ) {
+		delete_option( 'paybridgenp_wc_legacy_deactivated' );
+		return;
+	}
+	echo '<div class="notice notice-warning"><p><strong>PayBridgeNP:</strong> '
+		. esc_html__( 'an older copy of this plugin was installed in a differently named folder and has been deactivated, so your store now runs the current version. You can safely delete the old "paybridge-np-woocommerce" entry from the Plugins screen — your gateway settings are kept.', 'paybridgenp-for-woocommerce' )
+		. '</p></div>';
+} );
+
+// The legacy copy already loaded and defined these this request. Bail rather
+// than emit "already defined" warnings on every page load.
+if ( defined( 'PAYBRIDGENP_WC_VERSION' ) ) {
+	return;
+}
+
+define( 'PAYBRIDGENP_WC_VERSION', '1.3.0' );
 define( 'PAYBRIDGENP_WC_FILE',    __FILE__ );
 define( 'PAYBRIDGENP_WC_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'PAYBRIDGENP_WC_URL',     plugin_dir_url( __FILE__ ) );
+
+/**
+ * "Settings" on the Plugins screen.
+ *
+ * WooCommerce puts one there and merchants look for it in the same place. Without
+ * it the gateway is four clicks deep — Plugins, then WooCommerce, then Settings,
+ * then Payments, then the gateway — with nothing on the Plugins row hinting where
+ * it went.
+ */
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), function ( $links ) {
+	$url = admin_url( 'admin.php?page=wc-settings&tab=checkout&section=paybridge_np' );
+	array_unshift(
+		$links,
+		'<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'paybridgenp-for-woocommerce' ) . '</a>'
+	);
+	return $links;
+} );
 
 // Open the "Visit plugin site" link on the Plugins list in a new tab.
 add_filter( 'plugin_row_meta', function ( $links, $file ) {

@@ -3,7 +3,7 @@ Contributors:       paybridgenp
 Tags:               payment gateway, nepal, esewa, khalti, fonepay
 Requires at least:  5.8
 Tested up to:       7.0
-Stable tag:         1.2.1
+Stable tag:         1.3.0
 Requires PHP:       7.4
 WC requires at least: 7.0
 WC tested up to:    10.7
@@ -84,7 +84,7 @@ Use of the PayBridgeNP service is governed by its terms and privacy policy:
 
 **From source (developers)**
 
-1. Clone or copy the `packages/woocommerce` directory into `wp-content/plugins/paybridge-np-woocommerce`
+1. Clone https://github.com/paybridgenp/woocommerce.git into `wp-content/plugins/paybridge-np-woocommerce`
 2. Run `composer install --no-dev` inside the plugin directory
 3. Activate the plugin in WordPress admin and follow steps 4-5 above
 
@@ -132,11 +132,23 @@ Yes. PayBridgeNP works with both the classic shortcode checkout and the modern W
 
 == Changelog ==
 
+= 1.3.0 =
+* New: optional embedded checkout. Payment can open in an overlay on your own store
+  instead of redirecting. Off by default. Requires the Growth plan or above and your
+  store domain registered under Project > Embed domains in the PayBridgeNP dashboard.
+  Fonepay completes inside the overlay; eSewa and Khalti open in a separate window,
+  because both providers block their pages from being displayed inside another site.
+  If anything is missing the plugin falls back to the normal redirect.
+* Updated the bundled PayBridgeNP PHP library. A checkout request that timed out or
+  failed on the server was previously retried without an idempotency key, which could
+  create a duplicate checkout session. Retries are now safe.
+* The bundled library reported the wrong version in its requests. Corrected.
+
 = 1.2.1 =
 * Docs: correct how payment handling is described. The customer authenticates on their chosen wallet or bank's own page (eSewa, Khalti, or Fonepay); neither your store nor PayBridgeNP ever sees or handles their credentials. No functional changes.
 
 = 1.2.0 =
-* New: "Provider tiles" display mode. In WooCommerce > Settings > Payments > PayBridgeNP, switch "Display style" to "Provider tiles (direct redirect)" to show your enabled providers as branded tiles on the checkout. The customer picks one and is sent straight to that provider, skipping the PayBridgeNP hosted picker.
+* New: "Provider tiles" display mode. In WooCommerce > Settings > Payments > PayBridgeNP, switch "Display style" to "Provider tiles (direct redirect)" to show your enabled providers as branded tiles on the checkout. With Embedded checkout enabled, the selected provider is preselected in the PayBridgeNP overlay; otherwise the customer is sent straight to that provider.
 * New: provider tiles show only the providers enabled for your PayBridgeNP account, so customers never see a method you cannot accept.
 * New: the customer's billing details (name, email, phone, and address) are now forwarded to the PayBridgeNP hosted checkout, so they are pre-filled and the customer does not have to re-enter them.
 * Fix: webhook signature verification now reads the X-PayBridgeNP-Signature header that PayBridgeNP sends, so payment confirmation works reliably and paid orders move from On Hold to Processing.
